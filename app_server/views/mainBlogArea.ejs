@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <% include templates/head.ejs%>
+
+</head>
+
+<body>
+
+  <% include templates/header.ejs%>
+
+    <div class="row flow-text">
+      <div class="col s12 m6 l6">
+        <div class="card grey lighten-4 hoverable">
+          <div class="card-content">
+            <span class="card-title">
+              <strong>
+                <%= post.name%>
+              </strong>
+            </span>
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet officiis voluptatibus sapiente fugiat necessitatibus tempore, assumenda qui eos sequi iste quia possimus saepe enim recusandae dolores tenetur delectus eius quasi!</p>
+          </div>
+          <div class="card-action">
+            <a href="#">Full post</a>
+          </div>
+        </div>
+      </div>
+      <div class="col s12 m6 l6">
+        <div class="card grey lighten-4 hoverable">
+          <div class="card-content ">
+            <span class="card-title">
+              <strong> Post Name </strong>
+            </span>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur quisquam quod sapiente facere, necessitatibus, voluptatem fugiat esse possimus soluta perspiciatis tempore labore consectetur ipsam facilis repellendus qui fugit est</p>
+          </div>
+          <div class="card-action">
+            <a href="#">Full post</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <% include templates/footer.ejs%>
+
+      <script src="/javascripts/jquery-3.2.1.min.js"></script>
+      <script src="/materialize/js/materialize.min.js"></script>
+</body>
+
+</html>

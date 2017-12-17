@@ -7,15 +7,16 @@ let bodyParser = require('body-parser');
 
 let routes = require('./app_server/routes/index');
 let users = require('./app_server/routes/users');
-
+let engine = require('ejs-locals')
 let app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname,'app_server', 'views'));
+app.engine('ejs', engine)
 app.set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+// app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
