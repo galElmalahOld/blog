@@ -1,11 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <% include templates/head.ejs%>
-  
+  <% include templates/head.ejs%>
+
 </head>
+
 <body>
-    
+    <% include templates/header.ejs%>
+
+    <div class="card-frame grey lighten-4 z-depth-3">
+        <article>
+            <h1 class="center-align"><%= post.title%></h1>
+            <strong><%= post.createdOn.toDateString()%></strong>
+            <hr>
+            <p class="flow-text">
+                <%- post.content%>
+            </p>
+        </article>
+    </div>
+
+
     <% include templates/footer.ejs%>
 
     <script src="/javascripts/jquery-3.2.1.min.js"></script>

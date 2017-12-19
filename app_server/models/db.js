@@ -7,7 +7,7 @@ if (process.env.NODE_ENV === 'production'){
   console.log(dbURI);
 }
 
-mongoose.connect(dbURI);
+mongoose.connect(dbURI, {useMongoClient:true});
 
 // connection events for verification 
 

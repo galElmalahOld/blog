@@ -4,10 +4,12 @@ let favicon = require('serve-favicon');
 let logger = require('morgan');
 let cookieParser = require('cookie-parser');
 let bodyParser = require('body-parser');
+require('./app_server/models/db');
 
 let routes = require('./app_server/routes/index');
 let users = require('./app_server/routes/users');
-let engine = require('ejs-locals')
+let engine = require('ejs-locals');
+
 let app = express();
 
 // view engine setup

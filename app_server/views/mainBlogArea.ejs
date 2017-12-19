@@ -8,37 +8,40 @@
 
 <body>
 
-  <% include templates/header.ejs%>
+  <div id="header-img">
+    <nav id="upper-nav" class="z-depth-0">
+      <ul>
+          <li id="login-upper-nav" class="main-nav-menu"><a href="/login" ><i class="material-icons left">lock_open</i>Login</a></li>        
+      </ul>
+    </nav>
+    <h1 class="thin" id="title">{ blog }</h1>
+    <nav id= "main-nav">
+        <ul>
+          <li class="main-nav-menu"><a href="/about" ><i class="material-icons left">person</i>About</a></li>
+          <li class="main-nav-menu"><a href="#!" ><i class="material-icons left">work</i>Projects</a></li>
+          <li class="main-nav-menu"><a href="/" ><i class="material-icons left">home</i>Home</a></li>        
+        </ul>
+    </nav>
+  </div>
 
     <div class="row flow-text">
-      <div class="col s12 m6 l6">
-        <div class="card grey lighten-4 hoverable">
-          <div class="card-content">
-            <span class="card-title">
-              <strong>
-                <%= post.name%>
-              </strong>
-            </span>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet officiis voluptatibus sapiente fugiat necessitatibus tempore, assumenda qui eos sequi iste quia possimus saepe enim recusandae dolores tenetur delectus eius quasi!</p>
-          </div>
-          <div class="card-action">
-            <a href="#">Full post</a>
-          </div>
-        </div>
-      </div>
-      <div class="col s12 m6 l6">
-        <div class="card grey lighten-4 hoverable">
-          <div class="card-content ">
-            <span class="card-title">
-              <strong> Post Name </strong>
-            </span>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur quisquam quod sapiente facere, necessitatibus, voluptatem fugiat esse possimus soluta perspiciatis tempore labore consectetur ipsam facilis repellendus qui fugit est</p>
-          </div>
-          <div class="card-action">
-            <a href="#">Full post</a>
+      <% posts.forEach(post => { %>
+        <div class="col s12 m6 l6">
+          <div class="card grey lighten-4 hoverable">
+            <div class="card-content">
+              <span class="card-title">
+                <strong> <%=post.title%> </strong>
+              </span>
+              <p>
+                <%= post.content.replace(/<(?:.|\s)*?>/g,"").slice(0,60)+"..." %>
+              </p>
+            </div>
+              <div class="card-action">
+                  <a href="/posts/<%= post._id%>">Full post</a>
+              </div>
           </div>
         </div>
-      </div>
+        <% }) %>
     </div>
 
     <% include templates/footer.ejs%>
