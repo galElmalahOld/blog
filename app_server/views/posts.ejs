@@ -8,7 +8,6 @@
 
 <body>
     <% include templates/header.ejs%>
-
     <div class="card-frame grey lighten-4 z-depth-3">
         <article>
             <h1 class="center-align"><%= post.title%></h1>
@@ -18,7 +17,9 @@
                 <%- post.content%>
             </p>
         </article>
+        <a class="btn-floating btn-large waves-effect waves-light black hoverable" href="/posts/<%= post._id%>/delete"><i class="material-icons">delete</i></a>
     </div>
+
 
 
     <% include templates/footer.ejs%>

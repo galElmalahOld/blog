@@ -8,7 +8,8 @@ let ctrlOthers = require('../controllers/others')
 /* Main blog page */
 router.get('/', ctrlBlog.mainBlog);
 router.get('/posts/:postid', ctrlBlog.readOne);
-router.post('/post', ctrlBlog.createPost);
+router.get('/posts/:postid/delete', ctrlBlog.deleteOne);
+router.post('/login/admin', ctrlBlog.createPost);
 
 /* Admin area */
 router.get('/login/admin', ctrlOthers.adminArea);

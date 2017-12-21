@@ -52,9 +52,22 @@ let createPost = (req, res) => {
     }
 };
 
+let deleteOne = (req, res, next) => {
+    const id = req.params.postid;
+    console.log(id);
+    Posts.delete(id, (err, post) => {
+        if(err){
+            next(err)
+        } else {
+            res.redirect('/')
+        }
+    } );
+}
+
 
 module.exports = {
     mainBlog,
     readOne,
-    createPost
+    createPost,
+    deleteOne
 };

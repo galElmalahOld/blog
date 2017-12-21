@@ -32,6 +32,7 @@
               <span class="card-title">
                 <strong> <%=post.title%> </strong>
               </span>
+              <small style="font-size:13px"><strong><%=post.createdOn.toDateString()%></strong></small>  
               <p>
                 <%= post.content.replace(/<(?:.|\s)*?>/g,"").slice(0,60)+"..." %>
               </p>

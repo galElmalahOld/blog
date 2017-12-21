@@ -12,6 +12,9 @@ class PostsC {
     static create(post ,cb) {
         Posts.create(post, cb)
     }
+    static delete(id, cb) {
+        Posts.findByIdAndRemove(id, cb)
+    }
 }
 
 module.exports = {
