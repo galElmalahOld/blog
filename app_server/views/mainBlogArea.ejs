@@ -11,7 +11,13 @@
   <div id="header-img">
     <nav id="upper-nav" class="z-depth-0">
       <ul>
-          <li id="login-upper-nav" class="main-nav-menu"><a href="/login" ><i class="material-icons left">lock_open</i>Login</a></li>        
+          <% if( locals.user) {%>        
+            <li id="login-upper-nav" class="username"><a href="#!" ><i class="material-icons left">person</i>Logged in as <span class = "username"><%=user.name%></span></a></li> 
+            <li id="login-upper-nav" class="main-nav-menu"><a href="/logout" ><i class="material-icons left">clear</i>Logout</a></li> 
+          <% } else { %>     
+            <li id="login-upper-nav" class="main-nav-menu"><a href="/login" ><i class="material-icons left">lock_open</i>Login</a></li> 
+            <li id="login-upper-nav" class="main-nav-menu"><a href="/register" ><i class="material-icons left">create</i>Register</a></li> 
+          <% } %>             
       </ul>
     </nav>
     <h1 class="thin" id="title">{ blog }</h1>
@@ -33,8 +39,8 @@
                 <strong> <%=post.title%> </strong>
               </span>
               <small style="font-size:13px"><strong><%=post.createdOn.toDateString()%></strong></small>  
-              <p>
-                <%= post.content.replace(/<(?:.|\s)*?>/g,"").slice(0,60)+"..." %>
+              <p class ="truncate">
+                <%= post.content.replace(/<(?:.|\s)*?>/g,"").slice(0,60) %>
               </p>
             </div>
               <div class="card-action">

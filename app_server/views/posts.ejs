@@ -17,7 +17,9 @@
                 <%- post.content%>
             </p>
         </article>
+        <% if (locals.user.admin) { %>
         <a class="btn-floating btn-large waves-effect waves-light black hoverable" href="/posts/<%= post._id%>/delete"><i class="material-icons">delete</i></a>
+        <% } %>
     </div>
 
 

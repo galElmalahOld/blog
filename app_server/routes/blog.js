@@ -20,7 +20,8 @@ let mainBlog = (req, res) => {
         } else {
             res.render('mainBlogArea', {
                 title: 'Gal\'s blog',
-                posts: post
+                posts: post,
+                locals: res.locals
             });
         }
     });
@@ -31,13 +32,14 @@ let readOne = (req, res) => {
     Posts.find(id ,(err, post) => {
         res.render('posts', {
             title:'Gal\'s blog',
-            post: post
+            post: post,
+            locals: res.locals
         });
     });
 };
 
 let createPost = (req, res) => {
-    if(req.body.title&&req.body.content){
+    if(req.body.title && req.body.content){
         const post = {
             title: req.body.title,
             content:req.body.content
