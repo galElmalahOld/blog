@@ -15,6 +15,7 @@ class PostsC {
     static delete(id, cb) {
         Posts.findByIdAndRemove(id, cb)
     }
+
 }
 
 module.exports = {

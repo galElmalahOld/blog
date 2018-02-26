@@ -39,6 +39,7 @@ app.use(user);
 app.get('/', blog.mainBlog);
 app.get('/posts/:postid', blog.readOne);
 app.get('/posts/:postid/delete', blog.deleteOne);
+app.post('/posts/:postid', blog.createComment);
 
 
 /* Admin and users*/

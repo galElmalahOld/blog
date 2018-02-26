@@ -1,6 +1,7 @@
 
 const db = require('../models/functions')
 const Posts = db.PostsC;
+const User = require('../models/user');
 
 let sendJSONresponse = (res, status, content) => {
     res.status(status);
@@ -30,6 +31,8 @@ let mainBlog = (req, res) => {
 let readOne = (req, res) => {
     const id = req.params.postid
     Posts.find(id ,(err, post) => {
+        // post.content.replace("<img", "<img class=\"responsive-img\"");
+        // console.log(post.content);
         res.render('posts', {
             title:'Gal\'s blog',
             post: post,
@@ -41,6 +44,8 @@ let readOne = (req, res) => {
 let createPost = (req, res) => {
     if(req.session.admin){
         if(req.body.title && req.body.content){
+            // const regex = /\b<img/;
+            // req.body.content.replace(regex, "img class=\"responsive-img\"");
             const post = {
                 title: req.body.title,
                 content:req.body.content
@@ -54,7 +59,6 @@ let createPost = (req, res) => {
             })
         }
     } else {
-        res.error('Access denied');
         res.redirect('back');
     }
 };
@@ -71,10 +75,39 @@ let deleteOne = (req, res, next) => {
     } );
 }
 
+const createComment = (req, res, next) => {
+    const id  =  req.params.postid;
+
+    if(req.body.comment && req.session.uid){
+        Posts.find(id, (err, post) => {
+            if (err) return next(err)
+            // the post has been found
+            User.findById(req.session.uid, (err, user) => {
+                if (err) return next(err);
+                console.log(post.comments);
+                //create new comment
+                post.comments.push({
+                    name:user.name,
+                    comment:req.body.comment,
+                    createdOn: Date.now()
+                });
+                //save the comments
+                post.save(err => {
+                    if(err) return next(err);
+                });
+            })            
+
+        });
+    } else {
+        sendJSONresponse(res, 400, err)
+    }
+}
+
 
 module.exports = {
     mainBlog,
     readOne,
     createPost,
-    deleteOne
+    deleteOne,
+    createComment
 };

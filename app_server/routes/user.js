@@ -1,5 +1,10 @@
 const User = require('../models/user');
 
+function messagePassingAndRedirect(msg, path){
+  res.error(msg);
+  res.redirect(path);
+}
+
 const adminArea = (req, res) => {
   if(req.session.admin){
     res.render('adminArea',{title:'Gal\'s blog'})
@@ -43,19 +48,17 @@ const login = (req, res, next) => {
             console.log("user Logged in");
             res.redirect('/');
           } else {
-            res.error("Bad credentials");
-            res.redirect('back');
+            messagePassingAndRedirect("Bad credentials", "back");
           }
         });
       } else {
         //user name dosent exist
-        res.error("Bad credentials");
-        res.redirect('back');
+        messagePassingAndRedirect("Bad credentials", "back");
+
       }
     });
   } else {
-    res.error("Bad credentials");
-    res.redirect('back');
+    messagePassingAndRedirect("Bad credentials", "back");
   }
 };
   
@@ -65,8 +68,7 @@ const register = (req, res, next) => {
   User.findOne({'name':username}, (err, user) => {
     if (user){
       console.log(user);
-      res.error('Username already taken :/');
-      res.redirect('back');
+      messagePassingAndRedirect('Username already taken :/', "back");
     } else {
       if (username && pass) {
         let user = new User({

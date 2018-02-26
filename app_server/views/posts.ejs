@@ -17,17 +17,53 @@
                 <%- post.content%>
             </p>
         </article>
-        <% if (locals.user.admin) { %>
-        <a class="btn-floating btn-large waves-effect waves-light black hoverable" href="/posts/<%= post._id%>/delete"><i class="material-icons">delete</i></a>
+        <% if (locals.user) { %>
+            <% if (locals.user.admin) { %>
+            <a class="btn-floating btn-large waves-effect waves-light black hoverable" href="/posts/<%= post._id%>/delete"><i class="material-icons">delete</i></a>
+            <% } %>
         <% } %>
     </div>
+    
+    <div id="comments-wrapper" class="container">
+        <% if (locals.user) { %>
+            <div id="comments-input">
+                <form method="POST">
+                    <textarea name="comment"></textarea>
+                    <button class="btn waves-effect waves-light" id="comment-btn" type="submit" method="post" href>Comment
+                    <i class="material-icons right">send</i>
+                </form>
+            </div>
+            <% } else { %> 
+                <span> <h3>Login to comment on this post !</h3> </span>  
+            <% } %>
+            
+        <% post.comments.forEach(comment => { %>
+            <div class="comment flow-text">
+                <p><strong><%= comment.name%></strong> <small>
+                    <% if (locals.user) { %>
+                        <% if (locals.user.admin) { %>
+                            (King of men) <% }}%> 
+                    <%= comment.createdOn.toDateString() %></small></p>
+                <hr>
+                <p><%= comment.comment%></p>
+            </div>
+        <% }) %>
 
+    </div>
 
 
     <% include templates/footer.ejs%>
 
     <script src="/javascripts/jquery-3.2.1.min.js"></script>
     <script src="/materialize/js/materialize.min.js"></script>
+    <script>
+    //tmp solution for the img responsive class
+    let images = document.getElementsByTagName('img');
+    for(let i=0;i<images.length;i++){
+        images[i].classList.add("responsive-img");
+    }
+        
+    </script>
 </body>
 
 </html>
