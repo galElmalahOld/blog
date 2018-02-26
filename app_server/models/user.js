@@ -1,6 +1,8 @@
 // definig the schema for noraml users and admin controller
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+mongoose.Promise = require('bluebird');
+
 
 const userSchema = new mongoose.Schema({
   name:{type:String, required:true, unique:true,dropDups: true},
@@ -29,8 +31,6 @@ userSchema.pre('save', function(next){
     });
   });
 });
-
-userSchema.methods.isAdmin = () => this.admin;
 
 userSchema.methods.authenticate = function(candidatePass, cb){
   console.log(this);

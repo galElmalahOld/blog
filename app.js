@@ -6,13 +6,14 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const user = require('./middleware/user');
-require('./app_server/models/db');
-let blog = require('./app_server/routes/blog');
-let others = require('./app_server/routes/others');
-let users = require('./app_server/routes/user');
-
-
+const messages = require('./middleware/messages');
+const expressSanitizer = require('express-sanitizer');
 const engine = require('ejs-locals');
+
+require('./app_server/models/db');
+const blog = require('./app_server/routes/blog');
+const others = require('./app_server/routes/others');
+const users = require('./app_server/routes/user');
 
 const app = express();
 
@@ -25,14 +26,12 @@ app.set('view engine', 'ejs');
 // app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(expressSanitizer());
 app.use(cookieParser());
-app.use(session({
-  secret:'secret',
-  resave: false, 
-  saveUninitialized: true
-}));
+app.use(session({secret:'secret', resave: false, saveUninitialized: true}));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(messages);
 app.use(user);
 
 

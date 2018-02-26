@@ -39,18 +39,23 @@ let readOne = (req, res) => {
 };
 
 let createPost = (req, res) => {
-    if(req.body.title && req.body.content){
-        const post = {
-            title: req.body.title,
-            content:req.body.content
-        }
-        Posts.create(post, (err, post) => {
-            if(err){
-                sendJSONresponse(res, 400, err)
-            } else {
-                sendJSONresponse(res, 201, post)            
+    if(req.session.admin){
+        if(req.body.title && req.body.content){
+            const post = {
+                title: req.body.title,
+                content:req.body.content
             }
-        })
+            Posts.create(post, (err, post) => {
+                if(err){
+                    sendJSONresponse(res, 400, err)
+                } else {
+                    sendJSONresponse(res, 201, post)            
+                }
+            })
+        }
+    } else {
+        res.error('Access denied');
+        res.redirect('back');
     }
 };
 

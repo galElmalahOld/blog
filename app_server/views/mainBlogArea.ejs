@@ -7,12 +7,12 @@
 </head>
 
 <body>
-
+  
   <div id="header-img">
     <nav id="upper-nav" class="z-depth-0">
       <ul>
           <% if( locals.user) {%>        
-            <li id="login-upper-nav" class="username"><a href="#!" ><i class="material-icons left">person</i>Logged in as <span class = "username"><%=user.name%></span></a></li> 
+            <li id="login-upper-nav" class="username user-left"><i class="material-icons left">person</i>Logged in as <%=user.name%></li> 
             <li id="login-upper-nav" class="main-nav-menu"><a href="/logout" ><i class="material-icons left">clear</i>Logout</a></li> 
           <% } else { %>     
             <li id="login-upper-nav" class="main-nav-menu"><a href="/login" ><i class="material-icons left">lock_open</i>Login</a></li> 

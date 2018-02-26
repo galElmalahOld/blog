@@ -94,6 +94,25 @@ nav ul a:hover{
     width: 50%;
 }
 
+.error{
+    margin: 0 auto;
+    border: rgba(223, 76, 8, 0.8) solid 1px;
+    padding: 5px;
+    box-sizing: border-box;
+    width: 25%;
+    font-weight: 800;
+    text-align: center;
+    background-color: rgba(223, 76, 8, 0.2)
+}
+
+.user-right{
+    margin-right: 20px;
+}
+
+.user-left{
+    margin-left:20px;
+}
+
 @media only screen and (max-width: 600px) {
     .card-frame{
         width: 100%;
