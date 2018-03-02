@@ -9,8 +9,8 @@ let sendJSONresponse = (res, status, content) => {
 };
 
 let mainBlog = (req, res) => {
-    Posts.all((err, post) => {
-        if (!post) {
+    Posts.all((err, posts) => {
+        if (!posts) {
             sendJSONresponse(res, 404, {
                 "message": "No posts"
             });
@@ -19,9 +19,10 @@ let mainBlog = (req, res) => {
             sendJSONresponse(res, 400, err);
             return;
         } else {
+            posts.sort( (a,b) => b.createdOn - a.createdOn);
             res.render('mainBlogArea', {
                 title: 'Gal\'s blog',
-                posts: post,
+                posts: posts,
                 locals: res.locals
             });
         }
@@ -95,8 +96,9 @@ const createComment = (req, res, next) => {
                 post.save(err => {
                     if(err) return next(err);
                 });
-            })            
 
+            })            
+            res.redirect("back");
         });
     } else {
         sendJSONresponse(res, 400, err)

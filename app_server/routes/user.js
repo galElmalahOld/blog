@@ -1,6 +1,6 @@
 const User = require('../models/user');
 
-function messagePassingAndRedirect(msg, path){
+function messagePassingAndRedirect(res, msg, path){
   res.error(msg);
   res.redirect(path);
 }
@@ -48,27 +48,29 @@ const login = (req, res, next) => {
             console.log("user Logged in");
             res.redirect('/');
           } else {
-            messagePassingAndRedirect("Bad credentials", "back");
+            messagePassingAndRedirect(res,"Bad credentials", "back");
           }
         });
       } else {
         //user name dosent exist
-        messagePassingAndRedirect("Bad credentials", "back");
+        messagePassingAndRedirect(res,"Bad credentials", "back");
 
       }
     });
   } else {
-    messagePassingAndRedirect("Bad credentials", "back");
+    messagePassingAndRedirect(res, "Bad credentials", "back");
   }
 };
   
 const register = (req, res, next) => {
   const username = req.body.name;
   const pass = req.body.pass;
+  if(!username || !pass){
+    messagePassingAndRedirect(res,"Username and password are mendatory fields", "back");
+  }
   User.findOne({'name':username}, (err, user) => {
     if (user){
-      console.log(user);
-      messagePassingAndRedirect('Username already taken :/', "back");
+      messagePassingAndRedirect(res,'Username already taken :/', "back");
     } else {
       if (username && pass) {
         let user = new User({

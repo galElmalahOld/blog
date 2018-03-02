@@ -40,9 +40,8 @@
         <% post.comments.forEach(comment => { %>
             <div class="comment flow-text">
                 <p><strong><%= comment.name%></strong> <small>
-                    <% if (locals.user) { %>
-                        <% if (locals.user.admin) { %>
-                            (King of men) <% }}%> 
+                    <% if (comment.name=="gal") { %>
+                            (King of men) <% } %> 
                     <%= comment.createdOn.toDateString() %></small></p>
                 <hr>
                 <p><%= comment.comment%></p>
