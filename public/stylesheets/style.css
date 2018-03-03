@@ -155,7 +155,9 @@ nav ul a:hover{
     .card-frame{
         width: 100%;
         border: none;
+        padding: 5px;
     }
+
     #main-nav ul li, #general-nav ul li{
         display: inline-block;
         float: none;
